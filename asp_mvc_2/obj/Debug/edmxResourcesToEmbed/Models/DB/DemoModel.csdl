@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DemoDBModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="DemoDBEntities" p1:LazyLoadingEnabled="true">
+    <EntitySet Name="LOOKUPRole" EntityType="DemoDBModel.LOOKUPRole" />
+    <EntitySet Name="SYSUser" EntityType="DemoDBModel.SYSUser" />
+    <EntitySet Name="SYSUserProfile" EntityType="DemoDBModel.SYSUserProfile" />
+    <EntitySet Name="SYSUserRole" EntityType="DemoDBModel.SYSUserRole" />
+    <AssociationSet Name="FK__SYSUserRo__LOOKU__21B6055D" Association="DemoDBModel.FK__SYSUserRo__LOOKU__21B6055D">
+      <End Role="LOOKUPRole" EntitySet="LOOKUPRole" />
+      <End Role="SYSUserRole" EntitySet="SYSUserRole" />
+    </AssociationSet>
+    <AssociationSet Name="FK__SYSUserPr__SYSUs__1BFD2C07" Association="DemoDBModel.FK__SYSUserPr__SYSUs__1BFD2C07">
+      <End Role="SYSUser" EntitySet="SYSUser" />
+      <End Role="SYSUserProfile" EntitySet="SYSUserProfile" />
+    </AssociationSet>
+    <AssociationSet Name="FK__SYSUserRo__SYSUs__22AA2996" Association="DemoDBModel.FK__SYSUserRo__SYSUs__22AA2996">
+      <End Role="SYSUser" EntitySet="SYSUser" />
+      <End Role="SYSUserRole" EntitySet="SYSUserRole" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="LOOKUPRole">
+    <Key>
+      <PropertyRef Name="LOOKUPRoleID" />
+    </Key>
+    <Property Name="LOOKUPRoleID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="RoleName" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+    <Property Name="RoleDescription" Type="String" MaxLength="500" Unicode="false" FixedLength="false" />
+    <Property Name="RowCreatedSYSUserID" Type="Int32" Nullable="false" />
+    <Property Name="RowCreatedDateTime" Type="DateTime" Precision="3" />
+    <Property Name="RowModifiedSYSUserID" Type="Int32" Nullable="false" />
+    <Property Name="RowModifiedDateTime" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="SYSUserRole" Relationship="DemoDBModel.FK__SYSUserRo__LOOKU__21B6055D" FromRole="LOOKUPRole" ToRole="SYSUserRole" />
+  </EntityType>
+  <EntityType Name="SYSUser">
+    <Key>
+      <PropertyRef Name="SYSUserID" />
+    </Key>
+    <Property Name="SYSUserID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="LoginName" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="PasswordEncryptedText" Type="String" Nullable="false" MaxLength="200" Unicode="false" FixedLength="false" />
+    <Property Name="RowCreatedSYSUserID" Type="Int32" Nullable="false" />
+    <Property Name="RowCreatedDateTime" Type="DateTime" Precision="3" />
+    <Property Name="RowModifiedSYSUserID" Type="Int32" Nullable="false" />
+    <Property Name="RowMOdifiedDateTime" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="SYSUserProfile" Relationship="DemoDBModel.FK__SYSUserPr__SYSUs__1BFD2C07" FromRole="SYSUser" ToRole="SYSUserProfile" />
+    <NavigationProperty Name="SYSUserRole" Relationship="DemoDBModel.FK__SYSUserRo__SYSUs__22AA2996" FromRole="SYSUser" ToRole="SYSUserRole" />
+  </EntityType>
+  <EntityType Name="SYSUserProfile">
+    <Key>
+      <PropertyRef Name="SYSUserProfileID" />
+    </Key>
+    <Property Name="SYSUserProfileID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="SYSUserID" Type="Int32" Nullable="false" />
+    <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="Gender" Type="String" Nullable="false" MaxLength="1" Unicode="false" FixedLength="true" />
+    <Property Name="RowCreatedSYSUserID" Type="Int32" Nullable="false" />
+    <Property Name="RowCreatedDateTime" Type="DateTime" Precision="3" />
+    <Property Name="RowModifiedSYSUserID" Type="Int32" Nullable="false" />
+    <Property Name="RowModifiedDateTime" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="SYSUser" Relationship="DemoDBModel.FK__SYSUserPr__SYSUs__1BFD2C07" FromRole="SYSUserProfile" ToRole="SYSUser" />
+  </EntityType>
+  <EntityType Name="SYSUserRole">
+    <Key>
+      <PropertyRef Name="SYSUserRoleID" />
+    </Key>
+    <Property Name="SYSUserRoleID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="SYSUserID" Type="Int32" Nullable="false" />
+    <Property Name="LOOKUPRoleID" Type="Int32" Nullable="false" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="RowCreatedSYSUserID" Type="Int32" Nullable="false" />
+    <Property Name="RowCreatedDateTime" Type="DateTime" Precision="3" />
+    <Property Name="RowModifiedSYSUserID" Type="Int32" Nullable="false" />
+    <Property Name="RowModifiedDateTime" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="LOOKUPRole" Relationship="DemoDBModel.FK__SYSUserRo__LOOKU__21B6055D" FromRole="SYSUserRole" ToRole="LOOKUPRole" />
+    <NavigationProperty Name="SYSUser" Relationship="DemoDBModel.FK__SYSUserRo__SYSUs__22AA2996" FromRole="SYSUserRole" ToRole="SYSUser" />
+  </EntityType>
+  <Association Name="FK__SYSUserRo__LOOKU__21B6055D">
+    <End Role="LOOKUPRole" Type="DemoDBModel.LOOKUPRole" Multiplicity="1" />
+    <End Role="SYSUserRole" Type="DemoDBModel.SYSUserRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LOOKUPRole">
+        <PropertyRef Name="LOOKUPRoleID" />
+      </Principal>
+      <Dependent Role="SYSUserRole">
+        <PropertyRef Name="LOOKUPRoleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__SYSUserPr__SYSUs__1BFD2C07">
+    <End Role="SYSUser" Type="DemoDBModel.SYSUser" Multiplicity="1" />
+    <End Role="SYSUserProfile" Type="DemoDBModel.SYSUserProfile" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SYSUser">
+        <PropertyRef Name="SYSUserID" />
+      </Principal>
+      <Dependent Role="SYSUserProfile">
+        <PropertyRef Name="SYSUserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__SYSUserRo__SYSUs__22AA2996">
+    <End Role="SYSUser" Type="DemoDBModel.SYSUser" Multiplicity="1" />
+    <End Role="SYSUserRole" Type="DemoDBModel.SYSUserRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SYSUser">
+        <PropertyRef Name="SYSUserID" />
+      </Principal>
+      <Dependent Role="SYSUserRole">
+        <PropertyRef Name="SYSUserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
